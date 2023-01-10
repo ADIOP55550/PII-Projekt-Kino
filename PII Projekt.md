@@ -1,0 +1,99 @@
+
+<img src="data:image/png;base64,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" alt="logo" style="float:left" width=200 />
+
+<h1 style="padding:1em; margin-left:1em; text-align:center">Kolegium Nauk Przyrodniczych Uniwersytet Rzeszowski</h1>
+
+<br/>
+<br/>
+<br/>
+<center>
+<h3>Przedmiot:</h3>
+<h3>Projektowanie Interfejsów Internetowych</h3>
+<br/>
+<h3><i>Projekt zaliczeniowy - dokumentacja</i></h3>
+<br/>
+<br/>
+<h4>Skład zespołu:</h4>
+<ul style="list-style-type:none">
+<li><b>Dawid Gac</b></li>
+<li>Kamil Hołyszko</li>
+<li>Adrian Klamut</li>
+<li>Filip Kowalczyk</li>
+<li>Jakub Mazurek</li>
+</ul>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h4 style="text-align:center">Prowadzący: mgr inż. Marcin Mrukowicz</h4>
+<h4 style="text-align:center">Rzeszów, 2022</h4>
+
+</center>
+
+
+---
+
+%%PAGEBREAK%%
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
+
+## 1. Temat projektu
+
+Projekt graficzny aplikacji internetowej dla *małej lokalnej* sieci kin o nazwie: “Cinsinatra”. 
+
+## 2. Cel projektu
+
+Zaprojektowanie i wykonanie przejrzystego interfejsu witryny internetowej kina, która będzie miała za zadanie zachęcenie odwiedzających do skorzystania z jego usług.
+Dodatkowo będzie dostępny panel administracyjny umożliwiający zarządzanie najważniejszymi danymi.
+
+## 3. Funkcjonalności strony
+
+**Niezalogowany** użytkownik może przeglądać repertuar, informacje o pojedynczym filmie (najbliższe seanse, zwiastuny, galerie, obsada, opis), a także zobaczyć dane kontaktowe kina. 
+Może kupić bilet, ale nie może go rezerwować.
+Może też zarejestrować konto oraz się na nie zalogować.
+
+**Po zalogowaniu** użytkownik ma dostęp do części Mój Profil, gdzie może przeglądać historię zakupionych biletów oraz aktualne rezerwacje, może edytować dane personalne i preferencje.
+
+Jeśli **administrator zaloguje się** do panelu administracyjnego, ma możliwość przeglądania, dodawania, edycji i usuwania filmów, może je też przypisać do harmonogramu lub z niego usunąć.
+W sekcji zarządzania biletami ma możliwość rozpatrzenia zgłoszonych zwrotów.
+Ma dostęp do statystyk kina, w tym:
+- Dziennych przychodów
+- Statystyk popularności filmów
+- Statystyk sprzedaży biletów
+
+Może zarządzać salami kinowymi i miejscami na nich (w tym oznaczać je jako (nie)dostępne).
+Może ustalać promocje i zniżki (zniżki studenckie, promocje okresowe itp.).
+
+## 4. Widoki
+
+1. Strona główna
+2. Logowanie
+3. Rejestracja
+4. Mój profil
+5. Repertuar
+6. Widok pojedynczego filmu + Najbliższe seanse / zwiastuny / galerie / obsada / opis
+7. Wybierz miejsca
+8. Złóż zamówienie
+9. Potwierdzenie / odrzucenie płatności
+10. Kontakt
+11. Logowanie + wybór kina
+12. CRUD film
+	1. Dodawanie / edycja (z ceną)
+	2. Lista / usuwanie
+14. Archiwum repertuaru (jakie filmy były grane i już nie są)
+15. Zarządzanie biletami (np. zwroty)
+16. Zarządzanie repertuarem (dodaj filmy na przyszłe dni)
+17. Statystyki kina
+	1. Per film
+	2. Per dzień (/miesiąc)
+18. Zarządzanie salami[^widok] (zmiana wolnych miejsc)
+	1. Dodaj nową (najpierw rozmiar, potem zmień pojedyncze miejsca)
+	2. Usuń salę
+	3. Zmień dostępność miejsc
+19. Zarządzanie promocjami i zniżkami (student/uczeń/...)
+
+[^widok]: Przykładowy widok: 
+![img](http://kinosokol-krosno.pl/media/inne/sala.png)
+
