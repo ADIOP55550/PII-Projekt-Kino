@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+   <title>Cincinatra | Kup bilet</title>
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+      :root {
+         --bs-blue: #0d6efd;
+         --bs-indigo: #6610f2;
+         --bs-purple: #6f42c1;
+         --bs-pink: #d63384;
+         --bs-red: #dc3545;
+         --bs-orange: #fd7e14;
+         --bs-yellow: #ffc107;
+         --bs-green: #198754;
+         --bs-teal: #20c997;
+         --bs-cyan: #0dcaf0;
+         --bs-black: #000;
+         --bs-white: #fff;
+         --bs-gray: #6c757d;
+         --bs-gray-dark: #343a40;
+         --bs-gray-100: #f8f9fa;
+         --bs-gray-200: #e9ecef;
+         --bs-gray-300: #dee2e6;
+         --bs-gray-400: #ced4da;
+         --bs-gray-500: #adb5bd;
+         --bs-gray-600: #6c757d;
+         --bs-gray-700: #495057;
+         --bs-gray-800: #343a40;
+         --bs-gray-900: #212529;
+         --bs-primary: #FD7D14;
+         --bs-secondary: #333333;
+         --bs-success: #198754;
+         --bs-info: #0dcaf0;
+         --bs-warning: #dc3545;
+         --bs-danger: #130707;
+         --bs-light: #ffffff;
+         --bs-dark: #212529;
+         --bs-primary-rgb: 253, 125, 20;
+         --bs-secondary-rgb: 51, 51, 51;
+         --bs-success-rgb: 25, 135, 84;
+         --bs-info-rgb: 13, 202, 240;
+         --bs-warning-rgb: 220, 53, 69;
+         --bs-danger-rgb: 19, 7, 7;
+         --bs-light-rgb: 255, 255, 255;
+         --bs-dark-rgb: 33, 37, 41;
+         --bs-white-rgb: 255, 255, 255;
+         --bs-black-rgb: 0, 0, 0;
+         --bs-body-color-rgb: 255, 255, 255;
+         --bs-body-bg-rgb: 26, 26, 26;
+         --bs-font-sans-serif: 'Montserrat';
+         --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+         --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+         --bs-body-font-family: var(--bs-font-sans-serif);
+         --bs-body-font-size: 1rem;
+         --bs-body-font-weight: 400;
+         --bs-body-line-height: 1.5;
+         --bs-body-color: #fff;
+         --bs-body-bg: #1A1A1A;
+         --bs-border-width: 1px;
+         --bs-border-style: solid;
+         --bs-border-color: #dee2e6;
+         --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+         --bs-border-radius: 0.375rem;
+         --bs-border-radius-sm: 0.25rem;
+         --bs-border-radius-lg: 0.5rem;
+         --bs-border-radius-xl: 1rem;
+         --bs-border-radius-2xl: 2rem;
+         --bs-border-radius-pill: 50rem;
+         --bs-link-color: #0d6efd;
+         --bs-link-hover-color: #0a58ca;
+         --bs-code-color: #d63384;
+         --bs-highlight-bg: #fff3cd;
+
+      }
+
+      .btn-primary-outline {
+         --bs-btn-color: var(--bs-white);
+         --bs-btn-bg: transparent;
+         --bs-btn-border-color: var(--bs-primary);
+         --bs-btn-border-radius: .5rem;
+         --bs-btn-hover-color: var(--bs-white);
+         --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+         --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+         /*--bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);*/
+         --bs-btn-active-color: var(--bs-btn-hover-color);
+         --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+         --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+      }
+
+      .fs-7 {
+         font-size: 0.8rem;
+      }
+
+
+      table#seats {
+         margin: 2em -2px;
+      }
+
+      table#seats td.row-number {
+         font-size: 1.4em;
+         font-weight: 700;
+         padding: 0 .3em;
+      }
+
+      /* table#seats tr{ */
+      /* border: 10px solid transparent; */
+      /* } */
+
+      table#seats td {
+         border: 8px solid transparent;
+         margin-bottom: 1em;
+      }
+
+      input[type=checkbox].seat {
+         visibility: hidden;
+      }
+
+      .bg-deselected {
+         background-color: #652E01;
+      }
+
+      .bg-selected {
+         background-color: #FD7D14;
+      }
+
+      .bg-disabled {
+         background-color: #4D4D4D;
+      }
+
+      input[type=checkbox].seat+label {
+         background-color: #652E01;
+         margin-left: -1em;
+         padding: .5em;
+         width: 2.5em;
+         height: 2.5em;
+         vertical-align: center;
+         text-align: center;
+         font-weight: 600;
+         border-radius: .5em;
+         user-select: none;
+      }
+
+      input[type=checkbox]:disabled.seat+label {
+         background-color: #4D4D4D;
+      }
+
+      input[type=checkbox]:checked.seat+label {
+         background-color: #FD7D14;
+      }
+
+      div.border-gray {
+         border-color: gray !important;
+      }
+   </style>
+</head>
+
+<body>
+
+   <div class="container-fluid fixed-top bg-black p-4">
+      <div class="row">
+         <div class="col-4 my-2 d-none d-sm-block">
+            <a class="navbar-brand bg-secondary" href="index.html"
+               style="border-radius: 15px 0 15px 0; padding: 20px 25px; margin: 15px 0">
+               <img src="./logo.png" alt="Logo" width="260" class="d-inline-block">
+            </a>
+         </div>
+         <div class="col-4 my-2 d-sm-none">
+            <a class="navbar-brand bg-secondary" href="index.html"
+               style="border-radius: 15px 0 15px 0; padding: 20px 25px; margin: 15px 0">
+               <img src="./logo.png" alt="Logo" width="160" class="d-inline-block">
+            </a>
+         </div>
+         <div class="col-8 pt-2 d-none d-xl-block">
+            <button class="btn bg-primary text-black me-2">Strona główna</button>
+            <button class="btn bg-secondary text-primary me-2" style="width: 140px">Repertuar</button>
+            <button class="btn bg-secondary text-primary me-2" style="width: 140px">Cennik</button>
+            <button class="btn bg-secondary text-primary me-2" style="width: 140px">Kontakt</button>
+         </div>
+         <div class="col-8 text-end mt-sm-2 d-xl-none">
+            <button class="btn bg-primary text-black"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                  fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                     d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+               </svg></button>
+         </div>
+      </div>
+   </div>
+
+   <!-- <div class="container-fluid position-relative min-vh-100" style="padding-top: 170px; padding-bottom: 100px;"> -->
+   <div style="padding-top: 170px; padding-bottom: 130px" class="container-fluid position-relative min-vh-100">
+
+      <div class="d-none d-lg-flex row col-12 col-xxl-8 col-lg-10 mx-auto">
+         <div class="border-bottom col border-primary mx-2 text-center text-uppercase pb-1 border-3">
+            Wybierz miejsca
+         </div>
+         <div class="border-bottom col border-gray mx-2 text-center text-uppercase pb-1 border-3">
+            Wybierz bilety
+         </div>
+         <div class="border-bottom col border-gray mx-2 text-center text-uppercase pb-1 border-3">
+            Dane osobowe
+         </div>
+         <div class="border-bottom col border-gray mx-2 text-center text-uppercase pb-1 border-3">
+            Płatność
+         </div>
+         <div class="border-bottom col border-gray mx-2 text-center text-uppercase pb-1 border-3">
+            Podsumowanie
+         </div>
+      </div>
+
+      <div class="d-lg-none text-uppercase text-center py-2" style="margin-top: -60px;">
+         Wybierz miejsca
+      </div>
+      <div class="row d-lg-none mx-5">
+         <div class="border-bottom border-primary col mx-1 border-4" style="height:.3em">&nbsp;</div>
+         <div class="border-bottom border-gray col mx-1 border-4" style="height:.3em">&nbsp;</div>
+         <div class="border-bottom border-gray col mx-1 border-4" style="height:.3em">&nbsp;</div>
+         <div class="border-bottom border-gray col mx-1 border-4" style="height:.3em">&nbsp;</div>
+         <div class="border-bottom border-gray col mx-1 border-4" style="height:.3em">&nbsp;</div>
+      </div>
+
+      <div class="my-2 mt-4 col-9 mx-auto d-flex flex-column flex-lg-row justify-content-around align-items-baseline">
+         <h2 class="fw-bold pe-1">
+            Listy do M. 5
+            <span class="d-lg-inline d-none px-1">|</span>
+         </h2>
+         <span>
+            Od lat: 13
+         </span>
+         <span class="d-lg-inline d-none px-1">|</span>
+         <span>
+            Czas trwania: 114 min
+         </span>
+         <span class="d-lg-inline d-none px-1">|</span>
+         <span class="pe-1">
+            Produkcja: Polska [2022]
+         </span>
+         <span class="ps-lg-4 flex-grow-1 text-start text-lg-end fw-bold">
+            9.02.2024 | 19:25
+         </span>
+         <span class="ps-lg-3">
+            KOMEDIA
+         </span>
+      </div>
+
+      <div style="max-width: 100vw; overflow: auto;">
+         <div style="min-width: 800px;">
+
+            <div class="screen mt-5 mx-auto" style="width: 65%; max-width: 800px;">
+               <div class="w-100 bg-light rounded" style="height: .7em">&nbsp;</div>
+               <p class="mt-2 text-uppercase text-center">ekran</>
+            </div>
+
+            <center>
+
+               <table id="seats" class="smx-auto">
+                  <tr>
+                     <td class="row-number"><span>1</span></td>
+                     <td><input type="checkbox" name="" id="seat-1-1" class="seat"><label for="seat-1-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-1-2" class="seat"><label for="seat-1-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-1-3" class="seat"><label for="seat-1-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-4" class="seat"><label for="seat-1-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-1-5" class="seat"><label for="seat-1-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-1-6" class="seat"><label for="seat-1-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-1-7" class="seat"><label for="seat-1-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-8" class="seat"><label for="seat-1-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-9" class="seat"><label for="seat-1-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-1-10" class="seat"><label for="seat-1-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-11" class="seat"><label for="seat-1-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-12" class="seat"><label for="seat-1-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-13" class="seat"><label for="seat-1-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-14" class="seat"><label for="seat-1-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-1-15" class="seat"><label for="seat-1-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>1</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>2</span></td>
+                     <td><input type="checkbox" name="" id="seat-2-1" class="seat"><label for="seat-2-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-2-2" class="seat"><label for="seat-2-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-2-3" class="seat"><label for="seat-2-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-4" class="seat"><label for="seat-2-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-2-5" class="seat"><label for="seat-2-5">V</label></td>
+                     <td><input type="checkbox" disabled name="" id="seat-2-6" class="seat"><label
+                           for="seat-2-6">VI</label>
+                     </td>
+                     <td><input type="checkbox" disabled name="" id="seat-2-7" class="seat"><label
+                           for="seat-2-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-8" class="seat"><label for="seat-2-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-9" class="seat"><label for="seat-2-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-2-10" class="seat"><label for="seat-2-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-11" class="seat"><label for="seat-2-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-12" class="seat"><label for="seat-2-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-13" class="seat"><label for="seat-2-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-14" class="seat"><label for="seat-2-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-2-15" class="seat"><label for="seat-2-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>2</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>3</span></td>
+                     <td><input type="checkbox" name="" id="seat-3-1" class="seat"><label for="seat-3-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-3-2" class="seat"><label for="seat-3-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-3-3" class="seat"><label for="seat-3-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-4" class="seat"><label for="seat-3-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-3-5" class="seat"><label for="seat-3-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-3-6" class="seat"><label for="seat-3-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-3-7" class="seat"><label for="seat-3-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-8" class="seat"><label for="seat-3-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-9" class="seat"><label for="seat-3-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-3-10" class="seat"><label for="seat-3-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-11" class="seat"><label for="seat-3-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-12" class="seat"><label for="seat-3-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-13" class="seat"><label for="seat-3-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-14" class="seat"><label for="seat-3-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-3-15" class="seat"><label for="seat-3-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>3</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>4</span></td>
+                     <td><input type="checkbox" name="" id="seat-4-1" class="seat"><label for="seat-4-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-4-2" class="seat"><label for="seat-4-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-4-3" class="seat"><label for="seat-4-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-4" class="seat"><label for="seat-4-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-4-5" class="seat"><label for="seat-4-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-4-6" class="seat"><label for="seat-4-6">VI</label></td>
+                     <td><input type="checkbox" disabled name="" id="seat-4-7" class="seat"><label
+                           for="seat-4-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" disabled name="" id="seat-4-8" class="seat"><label
+                           for="seat-4-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-9" class="seat"><label for="seat-4-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-4-10" class="seat"><label for="seat-4-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-11" class="seat"><label for="seat-4-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-12" class="seat"><label for="seat-4-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-13" class="seat"><label for="seat-4-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-14" class="seat"><label for="seat-4-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-4-15" class="seat"><label for="seat-4-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>4</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>5</span></td>
+                     <td><input type="checkbox" name="" id="seat-5-1" class="seat"><label for="seat-5-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-5-2" class="seat"><label for="seat-5-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-5-3" class="seat"><label for="seat-5-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-4" class="seat"><label for="seat-5-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-5-5" class="seat"><label for="seat-5-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-5-6" class="seat"><label for="seat-5-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-5-7" class="seat"><label for="seat-5-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-8" class="seat"><label for="seat-5-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-9" class="seat"><label for="seat-5-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-5-10" class="seat"><label for="seat-5-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-11" class="seat"><label for="seat-5-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-12" class="seat"><label for="seat-5-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-13" class="seat"><label for="seat-5-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-14" class="seat"><label for="seat-5-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-5-15" class="seat"><label for="seat-5-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>5</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>6</span></td>
+                     <td><input type="checkbox" name="" id="seat-6-1" class="seat"><label for="seat-6-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-6-2" class="seat"><label for="seat-6-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-6-3" class="seat"><label for="seat-6-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-4" class="seat"><label for="seat-6-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-6-5" class="seat"><label for="seat-6-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-6-6" class="seat"><label for="seat-6-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-6-7" class="seat"><label for="seat-6-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-8" class="seat"><label for="seat-6-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-9" class="seat"><label for="seat-6-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-6-10" class="seat"><label for="seat-6-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-11" class="seat"><label for="seat-6-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-12" class="seat"><label for="seat-6-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-13" class="seat"><label for="seat-6-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-14" class="seat"><label for="seat-6-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-6-15" class="seat"><label for="seat-6-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>6</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>7</span></td>
+                     <td><input type="checkbox" name="" id="seat-7-1" class="seat"><label for="seat-7-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-7-2" class="seat"><label for="seat-7-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-7-3" class="seat"><label for="seat-7-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-4" class="seat"><label for="seat-7-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-7-5" class="seat"><label for="seat-7-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-7-6" class="seat"><label for="seat-7-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-7-7" class="seat"><label for="seat-7-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-8" class="seat"><label for="seat-7-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-9" class="seat"><label for="seat-7-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-7-10" class="seat"><label for="seat-7-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-11" class="seat"><label for="seat-7-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-12" class="seat"><label for="seat-7-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-13" class="seat"><label for="seat-7-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-14" class="seat"><label for="seat-7-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-7-15" class="seat"><label for="seat-7-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>7</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>8</span></td>
+                     <td><input type="checkbox" name="" id="seat-8-1" class="seat"><label for="seat-8-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-8-2" class="seat"><label for="seat-8-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-8-3" class="seat"><label for="seat-8-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-8-4" class="seat"><label for="seat-8-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-8-5" class="seat"><label for="seat-8-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-8-6" class="seat"><label for="seat-8-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-8-7" class="seat"><label for="seat-8-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-8-8" class="seat"><label for="seat-8-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-8-9" class="seat"><label for="seat-8-9">IX</label></td>
+                     <td><input type="checkbox" disabled name="" id="seat-8-10" class="seat"><label
+                           for="seat-8-10">X</label>
+                     </td>
+                     <td><input type="checkbox" disabled name="" id="seat-8-11" class="seat"><label
+                           for="seat-8-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-8-12" class="seat"><label for="seat-8-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" disabled name="" id="seat-8-13" class="seat"><label
+                           for="seat-8-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" disabled name="" id="seat-8-14" class="seat"><label
+                           for="seat-8-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-8-15" class="seat"><label for="seat-8-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>8</span></td>
+                  </tr>
+                  <tr>
+                     <td class="row-number"><span>9</span></td>
+                     <td><input type="checkbox" name="" id="seat-9-1" class="seat"><label for="seat-9-1">I</label></td>
+                     <td><input type="checkbox" name="" id="seat-9-2" class="seat"><label for="seat-9-2">II</label></td>
+                     <td><input type="checkbox" name="" id="seat-9-3" class="seat"><label for="seat-9-3">III</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-4" class="seat"><label for="seat-9-4">IV</label></td>
+                     <td><input type="checkbox" name="" id="seat-9-5" class="seat"><label for="seat-9-5">V</label></td>
+                     <td><input type="checkbox" name="" id="seat-9-6" class="seat"><label for="seat-9-6">VI</label></td>
+                     <td><input type="checkbox" name="" id="seat-9-7" class="seat"><label for="seat-9-7">VII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-8" class="seat"><label for="seat-9-8">VIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-9" class="seat"><label for="seat-9-9">IX</label></td>
+                     <td><input type="checkbox" name="" id="seat-9-10" class="seat"><label for="seat-9-10">X</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-11" class="seat"><label for="seat-9-11">XI</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-12" class="seat"><label for="seat-9-12">XII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-13" class="seat"><label for="seat-9-13">XIII</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-14" class="seat"><label for="seat-9-14">XIV</label>
+                     </td>
+                     <td><input type="checkbox" name="" id="seat-9-15" class="seat"><label for="seat-9-15">XV</label>
+                     </td>
+                     <td class="row-number"><span>9</span></td>
+                  </tr>
+               </table>
+
+            </center>
+
+         </div>
+      </div>
+
+
+      <a href="#" onclick="deselectAll()" role="button" id="selectBtn" style="width: fit-content;"
+         class="btn d-block text-white fw-bold text-uppercase my-3 mx-auto bg-primary d-none btn-lg">
+         Wybierz bilety >
+      </a>
+
+      <div class="legend flex-wrap bg-lg-primary sticky-bottom mb-3 ms-4 p-2 d-flex flex-lg-column"
+         style="font-size: 0.7em; width: fit-content; background-color: #1A1A1ACA;">
+         <div class="mx-1 swatch hstack">
+            <div class="d-inline-block my-1 mx-2 bg-deselected rounded-circle" style="width: 2em; height: 2em"></div>
+            <span class="d-inline-block text-uppercase">Wolne</span>
+         </div>
+         <div class="mx-1 swatch hstack">
+            <div class="d-inline-block my-1 mx-2 bg-disabled rounded-circle" style="width: 2em; height: 2em"></div>
+            <span class="d-inline-block text-uppercase">Zajęte</span>
+         </div>
+         <div class="mx-1 swatch hstack">
+            <div class="d-inline-block my-1 mx-2 bg-selected rounded-circle" style="width: 2em; height: 2em"></div>
+            <span class="d-inline-block text-uppercase">Wybrane</span>
+         </div>
+      </div>
+
+      <script>
+         const boxes = document.querySelectorAll("input[type=checkbox].seat");
+         const table = document.querySelector("table#seats");
+         const btn = document.querySelector("#selectBtn");
+
+         table.addEventListener("change", () => {
+            if (Array.from(boxes).some(b => b.checked))
+               btn.classList.remove("d-none");
+            else
+               btn.classList.add("d-none");
+         });
+
+         function deselectAll() {
+            boxes.forEach(c => c.checked = false);
+            btn.classList.add("d-none");
+         }
+
+      </script>
+
+
+
+      <div
+         class="row justify-content-center bg-danger mt-5 py-3 justify-content-center position-absolute w-100 bottom-0">
+         <div class="col-12 text-center mb-2">© 2017-2023 Cincinatra</div>
+         <div class="col-12">
+            <p class="text-primary text-center" style="word-spacing: 40px">Privacy Terms Support</p>
+         </div>
+      </div>
+   </div>
+
+
+
+</body>
+
+</html>
