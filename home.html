@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>Sincinatra | Strona główna</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        :root {
+            --bs-blue: #0d6efd;
+            --bs-indigo: #6610f2;
+            --bs-purple: #6f42c1;
+            --bs-pink: #d63384;
+            --bs-red: #dc3545;
+            --bs-orange: #fd7e14;
+            --bs-yellow: #ffc107;
+            --bs-green: #198754;
+            --bs-teal: #20c997;
+            --bs-cyan: #0dcaf0;
+            --bs-black: #000;
+            --bs-white: #fff;
+            --bs-gray: #6c757d;
+            --bs-gray-dark: #343a40;
+            --bs-gray-100: #f8f9fa;
+            --bs-gray-200: #e9ecef;
+            --bs-gray-300: #dee2e6;
+            --bs-gray-400: #ced4da;
+            --bs-gray-500: #adb5bd;
+            --bs-gray-600: #6c757d;
+            --bs-gray-700: #495057;
+            --bs-gray-800: #343a40;
+            --bs-gray-900: #212529;
+            --bs-primary: #FD7D14;
+            --bs-secondary: #333333;
+            --bs-success: #198754;
+            --bs-info: #0dcaf0;
+            --bs-warning: #ffc107;
+            --bs-danger: #130707;
+            --bs-light: #ffffff;
+            --bs-dark: #212529;
+            --bs-primary-rgb: 253, 125, 20;
+            --bs-secondary-rgb: 51, 51, 51;
+            --bs-success-rgb: 25, 135, 84;
+            --bs-info-rgb: 13, 202, 240;
+            --bs-warning-rgb: 255, 193, 7;
+            --bs-danger-rgb: 19, 7, 7;
+            --bs-light-rgb: 255, 255, 255;
+            --bs-dark-rgb: 33, 37, 41;
+            --bs-white-rgb: 255, 255, 255;
+            --bs-black-rgb: 0, 0, 0;
+            --bs-body-color-rgb: 255, 255, 255;
+            --bs-body-bg-rgb: 26, 26, 26;
+            --bs-font-sans-serif: 'Montserrat';
+            --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+            --bs-body-font-family: var(--bs-font-sans-serif);
+            --bs-body-font-size: 1rem;
+            --bs-body-font-weight: 400;
+            --bs-body-line-height: 1.5;
+            --bs-body-color: #fff;
+            --bs-body-bg: #1A1A1A;
+            --bs-border-width: 1px;
+            --bs-border-style: solid;
+            --bs-border-color: #dee2e6;
+            --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+            --bs-border-radius: 0.375rem;
+            --bs-border-radius-sm: 0.25rem;
+            --bs-border-radius-lg: 0.5rem;
+            --bs-border-radius-xl: 1rem;
+            --bs-border-radius-2xl: 2rem;
+            --bs-border-radius-pill: 50rem;
+            --bs-link-color: #0d6efd;
+            --bs-link-hover-color: #0a58ca;
+            --bs-code-color: #d63384;
+            --bs-highlight-bg: #fff3cd;
+
+        }
+        .btn-primary-outline {
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: transparent;
+            --bs-btn-border-color: var(--bs-primary);
+            --bs-btn-border-radius: .5rem;
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+            --bs-btn-hover-border-color: #{shade-color($bd-violet, 10%)};
+            /*--bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);*/
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #{shade-color($bd-violet, 20%)};
+            --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
+        }
+        .fs-7 {
+            font-size: 0.8rem;
+        }
+    </style>
+    <script>
+        let showMobileNav = false;
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        const login = getRandomInt(2);
+        // const login = 1;
+        if(login === 1) {
+            window.addEventListener('load', function () {
+                document.getElementById('loginButton').style.display = 'none';
+                document.getElementById('profileButton').style.display = 'block';
+            });
+        } else {
+            window.addEventListener('load', function () {
+                document.getElementById('loginButton').style.display = 'block';
+                document.getElementById('profileButton').style.display = 'none';
+            });
+        }
+        function showHideMobileNav() {
+            !showMobileNav ? document.getElementById('mobileNav').style.display = 'block' : document.getElementById('mobileNav').style.display = 'none';
+            showMobileNav = !showMobileNav;
+        }
+    </script>
+</head>
+<body style="background-image: url('./background.png');
+             background-repeat: no-repeat;
+background-size: auto 100%;
+background-position-x: 0;
+">
+        <div id="mobileNav" class="bg-secondary fixed-top" style="display: block; height: 100vh; width: 100vw; padding-top: 20px; z-index: 9999">
+            <div class="row mb-5">
+                <div class="col-8 ps-4"><img src="./logo.png" alt="" height="30" class="mt-3"> </div>
+                <div class="col-4 ps-4 text-end pe-4"><button class="btn btn-link text-light p-0" onclick="showHideMobileNav()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button></div>
+            </div>
+            <p class="text-primary text-decoration-underline d-inline ps-4">Strona główa</p><p class="d-inline text-light mx-2">/</p><p class="text-light d-inline">Mój profil</p>
+            <div class="row mt-5 text-center">
+                <div class="col-12 text-primary fw-bold"><p>Strona główna</p></div>
+                <div class="col-12 text-primary fw-bold mt-3"><p>Repertuar</p></div>
+                <div class="col-12 text-primary fw-bold mt-3"><p>Mój profil</p></div>
+                <div class="col-12 text-primary fw-bold mt-3"><p>Cennik</p></div>
+                <div class="col-12 text-primary fw-bold mt-3"><p>Kontakt</p></div>
+            </div>
+            <p class="position-fixed w-100 text-center text-primary" style="z-index: 9999; bottom: 20px">Zaloguj się</p></div>
+        </div>
+
+        <div class="container-fluid fixed-top bg-black p-4">
+            <div class="row d-xl-none d-flex">
+                <div class="col-4 my-2 d-none d-sm-block">
+                    <a class="navbar-brand bg-secondary" href="home.html" style="border-radius: 15px 0 15px 0; padding: 20px 25px; margin: 15px 0">
+                        <img src="./logo.png" alt="Logo" width="260" class="d-inline-block">
+                    </a>
+                </div>
+                <div class="col-4 my-2 d-sm-none">
+                    <a class="navbar-brand bg-secondary" href="home.html" style="border-radius: 15px 0 15px 0; padding: 20px 25px; margin: 15px 0">
+                        <img src="./logo.png" alt="Logo" width="160" class="d-inline-block">
+                    </a>
+                </div>
+                <div class="col-8 text-end mt-sm-2">
+                    <button class="btn bg-primary text-black" onclick="showHideMobileNav()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg></button>
+                </div>
+            </div>
+            <div class="row d-none d-xl-flex">
+                <div class="col-4 my-2">
+                    <a class="navbar-brand bg-secondary" href="home.html" style="border-radius: 15px 0 15px 0; padding: 20px 25px; margin: 15px 0">
+                    <img src="./logo.png" alt="Logo" width="260" class="d-inline-block">
+                    </a>
+                </div>
+                <div class="col-6 pt-2">
+                    <button class="btn bg-primary text-black me-2">Strona główna</button>
+                    <button class="btn bg-secondary text-primary me-2" style="width: 140px">Repertuar</button>
+                    <button class="btn bg-secondary text-primary me-2" style="width: 140px">Cennik</button>
+                    <button class="btn bg-secondary text-primary me-2" style="width: 140px">Kontakt</button>
+                </div>
+                <div class="col-2 pt-2 text-end" id="loginButton">
+                    <button  type="button" data-bs-toggle="dropdown" aria-expanded="false" class="btn bg-primary text-light me-2">Opcje logowania <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                    </svg></button>
+                    <ul class="dropdown-menu ms-4 p-1 text-center">
+                        <li><a class="dropdown-item text-primary border-dark border border-2" style="border-radius: 5px" href="#">Zaloguj się</a></li>
+                        <li><a class="dropdown-item text-primary border-dark border border-2 mt-1" style="border-radius: 5px" href="#">Załóż konto</a></li>
+                    </ul>
+                </div>
+                <div class="col-2 text-end " id="profileButton">
+                    <button  type="button" data-bs-toggle="dropdown" aria-expanded="false"  class="btn text-light me-2 p-0"><img alt="person" style="border-radius: 50px" src="./thispersondoesntexist.jpg" width="50" class="me-2"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                    </svg></button>
+                    <ul class="dropdown-menu ms-4 p-0 text-center">
+                        <li class="text-start"><a class="dropdown-item text-light bg-primary py-2 fs-7" style="border-radius: 5px 5px 0 0" href="#">John Doe</a></li>
+                        <div class="p-1">
+                            <li><a class="dropdown-item text-primary border-dark border border-2" style="border-radius: 5px" href="#">Mój profil</a></li>
+                            <li><a class="dropdown-item text-primary border-dark border border-2 mt-1" style="border-radius: 5px" href="#">Bilety</a></li>
+                            <li><a class="dropdown-item text-primary border-dark border border-2 mt-1" style="border-radius: 5px" href="#">Wyloguj</a></li>
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <div style="background-color: rgba(0,0,0,0.85); padding-bottom: 200px" class="container-fluid min-vh-100 position-relative">
+        <div class="w-100 d-none d-xl-block" style="height: 170px"></div>
+        <div class="w-100 d-block d-xl-none" style="height: 100px"></div>
+<!--        all in this container-->
+        <div class="row d-flex d-xl-none">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row justify-content-around">
+                    <div class="col">
+                        <div class="card">
+                            <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTY DO M.5</h5>
+                                <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                                <a href="#" class="btn bg-primary text-black me-2">Kup bilet</a>
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 d-none d-xl-flex" style="background-color: rgba(0,0,0,0.7);">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-6 p-5 position-relative">
+                        <h1>LISTY DO M.5</h1>
+                        <div class="position-relative">
+                            <div style="background: rgb(0,0,0);background: linear-gradient(0deg, rgba(0,0,0,1) 3%, rgba(255,255,255,0) 70%);" class="w-100 h-100 position-absolute"></div>
+
+                            <p>
+                                Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. Wojciech, który nie czuje wszechobecnej radosnej atmosfery, spotyka na swojej drodze kogoś, kto zmienia jego świąteczne plany. Z kolei Karina i Szczepan uwikłają się w walkę o spadek, który może poróżnić nawet najbliższych. Przekonają się czy z rodziną rzeczywiście dobrze wychodzi się tylko na zdjęciach. To oczywiście nie wszystko! W tej części pojawią się też nowi bohaterowie i ich zaskakujące historie.
+                            </p>
+                        </div>
+                        <button class="btn bg-primary text-light">Kup bilet</button>
+                        <button class="btn-primary-outline btn text-primary ms-2">Zobacz więcej</button>
+                    </div>
+                    <div class="col-6 p-5">
+                        <img src="./000FY9CR02CKUI3W-C122-F4.jpg" alt="karolak" style="width: 100%">
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-xl-1"></div>
+            <div class="col-xl-10 col-12">
+                <div class="row">
+                    <div class="col-12 col-xl-7 my-4 my-xl-0 text-xl-start text-center">
+                        <h1>Repertuar na najbliższy tydzień</h1>
+                    </div>
+                    <div class="col-xl-4 col-12 text-center">
+                        <button class="btn btn-primary-outline text-primary me-1 fs-7">Pn<br><span class="fw-bold">13</span><br>Gru</button>
+                        <button class="btn bg-primary text-black me-1 fs-7">Wt<br><span class="fw-bold">14</span><br>Gru</button>
+                        <button class="btn btn-primary-outline text-primary me-1 fs-7">Śr<br><span class="fw-bold">15</span><br>Gru</button>
+                        <button class="btn btn-primary-outline text-primary me-1 fs-7">Cz<br><span class="fw-bold">16</span><br>Gru</button>
+                        <button class="btn btn-primary-outline text-primary me-1 fs-7">Pt<br><span class="fw-bold">17</span><br>Gru</button>
+                        <button class="btn btn-primary-outline text-primary fs-7">Sb<br><span class="fw-bold">18</span><br>Gru</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-1"></div>
+        </div>
+        <div class="row d-xl-flex d-none">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <table class="table bg-black border-dark ps-4 align-middle">
+                    <thead style="height: 70px; vertical-align: middle">
+                    <tr>
+                        <th scope="col" class="ps-5">Tytuł filmu</th>
+                        <th scope="col">Rano</th>
+                        <th scope="col">Południe</th>
+                        <th scope="col">Wieczór</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row" class="ps-5">List do M.5</th>
+                        <td></td>
+                        <td>&nbsp;<br>&nbsp;</td>
+                        <td>19:30</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-5">Kevin sam w domu</th>
+                        <td></td>
+                        <td>15:00</td>
+                        <td>19:00<br>20:00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="ps-5">Faceci w czerni</th>
+                        <td>8:45</td>
+                        <td>16:00<br>17:00</td>
+                        <td>19:45 20:30<br>22:45</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="row d-flex d-xl-none pb-3 mt-5 bg-secondary bg-opacity-25">
+            <div class="col-12 my-3 text-center">
+                <h1>Listy do M.5</h1>
+            </div>
+            <div class="col border-end border-secondary ps-4">
+                <p class="fw-bold fs-6">Rano</p>
+                <p class="fs-7 p-0 m-0">10:20</p>
+            </div>
+            <div class="col border-end border-secondary">
+                <p class="fw-bold fs-6">W południe</p>
+                <p class="fs-7 p-0 m-0">13:00</p>
+            </div>
+            <div class="col">
+                <p class="fw-bold fs-6">Wieczorem</p>
+                <p class="fs-7 p-0 m-0">18:45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20:00</p>
+            </div>
+        </div>
+        <div class="row d-flex d-xl-none pb-3 bg-secondary bg-opacity-25">
+            <div class="col-12 my-3 text-center">
+                <h1>Kevin sam w domu</h1>
+            </div>
+            <div class="col border-end border-secondary ps-4">
+                <p class="fw-bold fs-6">Rano</p>
+                <p class="fs-7 p-0 m-0">10:00</p>
+            </div>
+            <div class="col border-end border-secondary">
+                <p class="fw-bold fs-6">W południe</p>
+                <p class="fs-7 p-0 m-0">12:00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13:45</p>
+            </div>
+            <div class="col">
+                <p class="fw-bold fs-6">Wieczorem</p>
+                <p class="fs-7 p-0 m-0">18:45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20:00</p>
+            </div>
+        </div>
+        <div class="row d-flex d-xl-none pb-3 bg-secondary bg-opacity-25">
+            <div class="col-12 my-3 text-center">
+                <h1>Faceci w czerni</h1>
+            </div>
+            <div class="col border-end border-secondary ps-4">
+                <p class="fw-bold fs-6">Rano</p>
+                <p class="fs-7 p-0 m-0">8:15</p>
+            </div>
+            <div class="col border-end border-secondary">
+                <p class="fw-bold fs-6">W południe</p>
+                <p class="fs-7 p-0 m-0">13:00</p>
+            </div>
+            <div class="col">
+                <p class="fw-bold fs-6">Wieczorem</p>
+                <p class="fs-7 p-0 m-0">18:45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20:00</p>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-1 d-xl-flex d-none"></div>
+            <div class="col text-center text-xl-start"><h1>POLECAMY</h1></div>
+        </div>
+        <div id="carouselExample" class="carousel slide px-5 d-xl-none d-flex">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card">
+                        <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">LISTY DO M.5</h5>
+                            <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                            <div class="w-100 text-center">
+
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">LISTY DO M.5</h5>
+                            <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                            <div class="w-100 text-center">
+
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">LISTY DO M.5</h5>
+                            <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                            <div class="w-100 text-center">
+
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="text-primary" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="text-primary" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg> </span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="row mt-2 d-xl-flex d-none">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row justify-content-around">
+                    <div class="col">
+                        <div class="card">
+                            <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTY DO M.5</h5>
+                                <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                                <a href="#" class="btn bg-primary text-black me-2">Kup bilet</a>
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTY DO M.5</h5>
+                                <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                                <a href="#" class="btn bg-primary text-black me-2">Kup bilet</a>
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTY DO M.5</h5>
+                                <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                                <a href="#" class="btn bg-primary text-black me-2">Kup bilet</a>
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="./000FY9CR02CKUI3W-C122-F4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTY DO M.5</h5>
+                                <p class="card-text">Melowi jak zwykle nic nie wychodzi. Zbieg okoliczności sprawia, że staje się bohaterem mimo woli, a jego nie zawsze kryształowy charakter znowu zostaje wystawiony na próbę. </p>
+                                <a href="#" class="btn bg-primary text-black me-2">Kup bilet</a>
+                                <a href="#" class="btn btn-primary-outline text-light">Czytaj więcej</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="row my-5">
+            <div class="col-1 d-xl-flex d-none"></div>
+            <div class="col text-center text-xl-start"><h1>ZAPOWIEDZI</h1></div>
+        </div>
+        <div id="carouselExample1" class="carousel slide px-5 d-xl-none d-flex">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="col" style="background-image: url('./recom1.jpg'); background-position: center; height: 300px; border-radius: 10px">
+                    </div>
+                    <div class="col text-truncate">
+                        <h1>01.01 <span class="text-decoration-underline fw-bold">Test Featured Title</span></h1>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col" style="background-image: url('./000FY9CR02CKUI3W-C122-F4.jpg'); background-position: center;  height: 300px; border-radius: 10px">
+                    </div>
+                    <div class="col text-truncate">
+                        <h1>01.01 <span class="text-decoration-underline fw-bold">Test Featured Title</span></h1>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col" style="background-image: url('./recom3.jpg'); background-position: center;  height:300px; border-radius: 10px">
+                    </div>
+
+                    <div class="col text-truncate">
+                        <h1>01.01 <span class="text-decoration-underline fw-bold">Test Featured Title</span></h1>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1" data-bs-slide="prev">
+                <span class="text-primary" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1" data-bs-slide="next">
+                <span class="text-primary" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg> </span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="row mt-2 d-none d-xl-flex">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row justify-content-around">
+                    <div class="col me-4" style="background-image: url('./recom1.jpg'); background-position: center; height: 300px; border-radius: 10px">
+                    </div>
+                    <div class="col mx-5" style="background-image: url('./000FY9CR02CKUI3W-C122-F4.jpg'); background-position: center;  height: 300px; border-radius: 10px">
+                    </div>
+                    <div class="col ms-4" style="background-image: url('./recom3.jpg'); background-position: center;  height:300px; border-radius: 10px">
+                    </div>
+                </div>
+                <div class="row justify-content-around">
+                    <div class="col me-4 text-truncate">
+                        <h1>01.01 <span class="text-decoration-underline fw-bold">Test Featured Title</span></h1>
+                    </div>
+                    <div class="col mx-5 text-truncate">
+                        <h1>01.01 <span class="text-decoration-underline fw-bold">Test Featured Title</span></h1>
+                    </div>
+                    <div class="col ms-4 text-truncate">
+                        <h1>01.01 <span class="text-decoration-underline fw-bold">Test Featured Title</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="row justify-content-center bg-danger mt-5 py-3 justify-content-center lign-content-center position-absolute w-100 bottom-0">
+            <div class="col-12 text-center mb-2">© 2017-2023 Cincinatra</div>
+            <div class="col-12"><p class="text-primary text-center" style="word-spacing: 40px">Privacy Terms Support</p></div>
+        </div>
+    </div>
+</body>
+</html>
